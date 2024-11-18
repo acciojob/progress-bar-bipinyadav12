@@ -46,3 +46,13 @@ function update() {
         next.disabled = false;
     }
 }
+cy.visit(baseUrl + "/main.html");
+cy.get('#circle-1').should(($el) => {
+    expect($el).to.have.css('width').and.not.equal('0px');
+    expect($el).to.have.css('height').and.not.equal('0px');
+}).should('be.visible');
+
+cy.get('#circle-2').should('be.visible');
+cy.get('#circle-3').should('be.visible');
+cy.get('#circle-4').should('be.visible');
+cy.get('#circle-5').should('be.visible');
