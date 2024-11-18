@@ -17,9 +17,9 @@ body {
     align-items: center;
     justify-content: space-between;
     position: relative;
-    width: 100%;
+
     max-width: 400px;
-    margin-bottom: 30px;
+
 }
 
 .progress {
