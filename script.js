@@ -6,53 +6,37 @@ const circles = document.querySelectorAll('.circle');
 let currentActive = 1;
 
 next.addEventListener('click', () => {
-    currentActive++;
+  currentActive++;
 
-    if (currentActive > circles.length) {
-        currentActive = circles.length;
-    }
+  if (currentActive > circles.length) {
+    currentActive = circles.length;
+  }
 
-    update();
+  update();
 });
 
 prev.addEventListener('click', () => {
-    currentActive--;
+  currentActive--;
 
-    if (currentActive < 1) {
-        currentActive = 1;
-    }
+  if (currentActive < 1) {
+    currentActive = 1;
+  }
 
-    update();
+  update();
 });
 
 function update() {
-    circles.forEach((circle, index) => {
-        if (index < currentActive) {
-            circle.classList.add('active');
-        } else {
-            circle.classList.remove('active');
-        }
-    });
-
-    const activeCircles = document.querySelectorAll('.circle.active');
-    progress.style.width = ((activeCircles.length - 1) / (circles.length - 1)) * 100 + '%';
-
-    if (currentActive === 1) {
-        prev.disabled = true;
-    } else if (currentActive === circles.length) {
-        next.disabled = true;
+  circles.forEach((circle, index) => {
+    if (index < currentActive) {
+      circle.classList.add('active');
     } else {
-        prev.disabled = false;
-        next.disabled = false;
+      circle.classList.remove('active');
     }
-}
-cy.visit(baseUrl + "/main.html");
-cy.get('#circle-1').should(($el) => {
-    expect($el).to.have.css('width').and.not.equal('0px');
-    expect($el).to.have.css('height').and.not.equal('0px');
-}).should('be.visible');
+  });
 
-cy.get('#circle-2').should('be.visible');
-cy.get('#circle-3').should('be.visible');
-cy.get('#circle-4').should('be.visible');
-cy.get('#circle-5').should('be.visible');
+  const activeCircles = document.querySelectorAll('.circle.active');
+  progress.style.width = ((activeCircles.length - 1) / (circles.length - 1)) * 100 + '%';
+
+  prev.disabled = currentActive === 1;
+  next.disabled = currentActive === circles.length;
+}
